@@ -1,0 +1,16 @@
+<% provide(:title, 'Sign up') %>
+<h1>Sign up</h1>
+
+<div class="container">
+  <%= form_for(@user, html: {class: 'form-signup', role: 'form'}) do |f| %>
+  <%= render 'shared/error_messages' %>
+
+  <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
+  <%= f.text_field :email, class: 'form-control', placeholder: 'Email Address' %>
+  <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
+  <%= f.password_field :password_confirmation, class: 'form-control',
+      placeholder: 'Password Confirmation' %>
+
+  <%= f.submit "Create my account", class: "btn btn-large btn-primary" %>
+  <% end %>
+</div>
