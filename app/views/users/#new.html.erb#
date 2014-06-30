@@ -5,8 +5,7 @@
   <%= form_for(@user, html: {class: 'form-signup', role: 'form'}) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
-  <%= f.text_field :email, class: 'form-control', placeholder: 'Email Address' %>
+  <%= f.text_field :name, class: 'form-control', placeholder:  %>
   <%= f.password_field :password, class: 'form-control', placeholder: 'Password' %>
   <%= f.password_field :password_confirmation, class: 'form-control',
       placeholder: 'Password Confirmation' %>

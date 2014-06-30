@@ -1,0 +1,19 @@
+<% provide(:title, 'Elder Info') %>
+<h1>Elder</h1>
+
+<p>Tell us a bit about who you are looking after!</p>
+
+<div class="container">
+  <%= form_for(@elder, url: '/create_elder', html: {class: 'form-elder', role: 'form'}) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.text_field :name, class: 'form-control', placeholder: 'Name' %>
+  <%= f.number_field :age, class: 'form-control', placeholder: 'Age' %>
+  <%= f.text_field :relationship, class: 'form-control', placeholder: 'Relationship' %>
+  <%= f.text_field :sex, class: 'form-control', placeholder: 'Sex' %>
+  <%= f.text_field :condition_list, class: 'form-control', placeholder: 'Conditions' %>
+
+  <%= f.submit "Done", class: "btn btn-large btn-primary" %>
+  <% end %>
+</div>
+
