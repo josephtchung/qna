@@ -1,0 +1,19 @@
+<% provide(:title, 'Show Question') %>
+<h1>Show Question</h1>
+
+<p> <%= @question.user.name %> asked: </p>
+
+<div class="container">
+  <div class="question-content">
+    <%= @question.content %>
+  </div>
+
+  <div class="question-topics">
+    <%= @question.topic_list %>
+  </div>
+
+  <div class="question-conditions">
+    <%= @question.condition_list %>
+  </div>
+
+</div>

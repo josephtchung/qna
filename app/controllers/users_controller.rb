@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :signed_in_user, only: [:index, :edit, :update]
+  before_action :signed_in_user, only: [:index, :edit, :update, :new_elder]
   before_action :correct_user,   only: [:edit, :update]
   before_action :admin_user,     only: :destroy
 
@@ -44,7 +44,21 @@ class UsersController < ApplicationController
     @users = User.paginate(page: params[:page])
   end
 
+# Elder Actions
+  def edit_elder
+    @elder = current_user.get_or_build_elder
+  end
 
+  def create_elder
+    @elder = current_user.get_or_build_elder
+    @elder.update_attributes(elder_params)
+    if @elder.save
+      flash[:success] = "Elder Info Saved!"
+      redirect_to current_user
+    else
+      render 'edit_elder'
+    end
+  end
 
   private
 
@@ -52,7 +66,11 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password,
       :password_confirmation)
   end
- 
+
+  def elder_params
+    params.require(:elder).permit(:name, :age, :sex, :relationship, :condition_list)
+  end
+
   # Before filters
 
   def correct_user
