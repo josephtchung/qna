@@ -1,0 +1,29 @@
+<% provide(:title, 'Show Question') %>
+<h1>Main Feed</h1>
+
+Select by Topic:<% tag_cloud(@topic_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+  <%= link_to tag.name, { :action => :home, :topic_id => tag.name }, :class => css_class %>
+<% end %>
+<%= link_to 'CLEAR', root_path %>
+<br>
+Select by Condition: <% tag_cloud(@condition_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+  <%= link_to tag.name, { :action => :home, :condition_id => tag.name }, :class => css_class %>
+<% end %>
+<%= link_to 'CLEAR', root_path %>
+
+
+<%= will_paginate @questions %>
+
+<ul class="feed-list">
+  <% @questions.each do |question| %>
+  <li>
+    <%= question.user.name %> asked:
+    <%= link_to question.content, question_path(question) %>
+  <br> Topics: <%= question.topic_list %>
+  <br> Conditions: <%= question.condition_list %>
+  <br> <%= pluralize(question.answers.count, "answer") %>
+  </li>
+  <% end %>
+</ul>
+
+<%= will_paginate @questions %>

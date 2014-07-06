@@ -9,11 +9,37 @@
   </div>
 
   <div class="question-topics">
-    <%= @question.topic_list %>
+    Topics: <%= @question.topic_list %>
   </div>
 
   <div class="question-conditions">
-    <%= @question.condition_list %>
+    Conditions: <%= @question.condition_list %>
   </div>
 
 </div>
+
+<%= will_paginate @answers %>
+
+<ul class="answers">
+  <% @answers.each do |answer| %>
+  <li>
+    <%= answer.user.name %> answered: 
+    <%= answer.content %>
+  </li>
+  <% end %>
+</ul>
+
+<%= will_paginate @answers %>
+
+
+<div class="container">
+  <p> Answer this question</p>
+  <%= form_for(@answer, url: '/create_answer', html: {class: 'form-question', role: 'form'}) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.text_field :content, class: 'form-control', placeholder: 'Your Answer' %>  
+  <%= f.hidden_field :question_id, value: @question.id %>
+  <%= f.hidden_field :user_id, value: @user.id %>
+  <%= f.submit "Done", class: "btn btn-large btn-primary" %>
+  <% end %>
+</div class="container">

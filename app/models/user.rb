@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
 
   has_one :elder
   has_many :questions
+  has_many :answers
 
   acts_as_taggable_on :topics
 

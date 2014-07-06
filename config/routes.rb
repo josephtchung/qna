@@ -1,18 +1,20 @@
 Qna::Application.routes.draw do
 
-  get "questions/new"
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
   resources :questions
 
-  root 'static_pages#home'
-
-  match '/edit_elder', to: 'users#edit_elder', via: 'get'
-  match '/create_elder', to: 'users#create_elder', via: [:post, :patch]
+  root 'feed#home'
 
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
+
+  match '/edit_elder', to: 'users#edit_elder', via: 'get'
+  match '/create_elder', to: 'users#create_elder', via: [:post, :patch]
+
+  match '/create_answer', to: 'questions#create_answer', via: [:post, :patch]
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
