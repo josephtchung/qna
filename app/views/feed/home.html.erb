@@ -1,6 +1,4 @@
 <% provide(:title, 'Show Question') %>
-<h1>Main Feed</h1>
-
 <div class="row">
   <div class="col-md-1">Topic:</div>
   <div class="col-md-11">
@@ -45,3 +43,6 @@
 </div>
 
 <%= will_paginate @questions %>
+
+<%= link_to "Ask a Question", new_question_path, class: 'btn btn-primary' %>
+

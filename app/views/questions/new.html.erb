@@ -1,13 +1,11 @@
 <% provide(:title, 'New Question') %>
-<h1>New Question</h1>
-
-<p>Ask a question</p>
+<h3>Ask a question</h3>
 
 <div class="container">
   <%= form_for(@question, html: {class: 'form-question', role: 'form'}) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.text_field :content, class: 'form-control', placeholder: 'Your Question' %>
+  <%= f.text_area :content, rows: '3', class: 'form-control', placeholder: 'Your Question' %>
   <%= f.text_field :topic_list, class: 'form-control', placeholder: 'Topics' %>
   <%= f.text_field :condition_list, class: 'form-control', placeholder: 'Conditions' %>
 

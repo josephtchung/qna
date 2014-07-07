@@ -1,54 +1,46 @@
 <% provide(:title, 'Show Question') %>
-<h1>Show Question</h1>
 
-<p> <%= @question.user.name %> asked: </p>
+  <h3> <%= @question.user.name %> asked </h3>
+  <p>  <%= @question.content %> </p>
 
-<div class="container">
-  <div class="question-content">
-    <%= @question.content %>
-  </div>
+  Topics: <%= @question.topic_list %>
+  <br>
+  Conditions: <%= @question.condition_list %>
 
-  <div class="question-topics">
-    Topics: <%= @question.topic_list %>
-  </div>
+<% if @answers.count > 0 %>
+  <h4>Answers</h4>
+  <%= will_paginate @answers %>
 
-  <div class="question-conditions">
-    Conditions: <%= @question.condition_list %>
-  </div>
-
-</div>
-
-<%= will_paginate @answers %>
-
-<ul class="answers">
   <% @answers.each do |answer| %>
-  <li>
-    <%= answer.user.name %> answered: 
-    <%= answer.content %>
-  </li>
+    <div class="row">
+      <div class="col-md-1">
+	<%= answer.user.name %>:
+      </div>
+      <div class="col-md-11">
+	<%= answer.content %>
+      </div>
+    </div>
   <% end %>
-</ul>
 
-<%= will_paginate @answers %>
+  <%= will_paginate @answers %>
+<% end %>
 
+<p></p>
 
 <% if @user %> <%# only show answer form if signed in %>
 
-<div class="container">
-  <p> Answer this question</p>
   <%= form_for(@answer, url: '/create_answer', html: {class: 'form-question', role: 'form'}) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.text_field :content, class: 'form-control', placeholder: 'Your Answer' %>  
+  <%= f.text_area :content, rows: '3', class: 'form-control', placeholder: 'Your Answer' %>  
   <%= f.hidden_field :question_id, value: @question.id %>
   <%= f.hidden_field :user_id, value: @user.id %>
   <%= f.submit "Done", class: "btn btn-large btn-primary" %>
   <% end %>
-</div class="container">
 
 <% else %>
 
 <p>
-<%= link_to 'Answer This Question', signin_show_path %>
+<%= link_to 'Answer This Question', signin_show_path, class: 'btn btn-primary' %>
 </p>
 <% end %>

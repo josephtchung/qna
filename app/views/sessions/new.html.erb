@@ -13,11 +13,9 @@
       <%= f.password_field :password, class: 'form-control' %>
   </div>
 
-      <%= f.hidden_field :after, value: @after %>
+  <%= f.hidden_field :after, value: @after %>
+  <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+<% end %>
 
-      <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
-    <% end %>
-
-    <br>
-    New user? <button class="btn btn-default"><%= link_to "Sign up now!", signup_path %></button>
-
+<br>
+New user? <%= link_to "Sign up now!", signup_path, class: 'btn btn-default' %>
