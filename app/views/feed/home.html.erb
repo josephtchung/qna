@@ -4,11 +4,10 @@
   <div class="col-md-11">
   <div class="btn-group">
     <% tag_cloud(@topic_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-      <button type="button" class="btn btn-default">
-	<%= link_to tag.name, { :action => :home, :topic_id => tag.name }, :class => css_class %>
-      </button>
+    <%= link_to tag.name, { :action => :home, :topic_id => tag.name }, 
+      :class => 'btn btn-default ' + css_class %>
     <% end %>
-    <button type="button" class="btn btn-default"><%= link_to 'CLEAR', root_path %></button>
+    <%= link_to 'CLEAR', root_path, class: 'btn btn-default' %>
     </div>
   </div>
 </div>
@@ -18,11 +17,10 @@
   <div class="col-md-11">
   <div class="btn-group">
     <% tag_cloud(@condition_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-      <button type="button" class="btn btn-default">
-	<%= link_to tag.name, { :action => :home, :condition_id => tag.name }, :class => css_class %>
-      </button>
+    <%= link_to tag.name, { :action => :home, :condition_id => tag.name }, 
+      :class => 'btn btn-default ' + css_class %>
     <% end %>
-    <button type="button" class="btn btn-default"><%= link_to 'CLEAR', root_path %></button>
+    <%= link_to 'CLEAR', root_path, class: 'btn btn-default' %>
     </div>
   </div>
 </div>
