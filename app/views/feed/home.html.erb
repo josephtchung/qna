@@ -1,29 +1,47 @@
 <% provide(:title, 'Show Question') %>
 <h1>Main Feed</h1>
 
-Select by Topic:<% tag_cloud(@topic_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-  <%= link_to tag.name, { :action => :home, :topic_id => tag.name }, :class => css_class %>
-<% end %>
-<%= link_to 'CLEAR', root_path %>
-<br>
-Select by Condition: <% tag_cloud(@condition_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-  <%= link_to tag.name, { :action => :home, :condition_id => tag.name }, :class => css_class %>
-<% end %>
-<%= link_to 'CLEAR', root_path %>
+<div class="row">
+  <div class="col-md-1">Topic:</div>
+  <div class="col-md-11">
+  <div class="btn-group">
+    <% tag_cloud(@topic_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+      <button type="button" class="btn btn-default">
+	<%= link_to tag.name, { :action => :home, :topic_id => tag.name }, :class => css_class %>
+      </button>
+    <% end %>
+    <button type="button" class="btn btn-default"><%= link_to 'CLEAR', root_path %></button>
+    </div>
+  </div>
+</div>
 
+<div class="row">
+  <div class="col-md-1">Condition:</div>
+  <div class="col-md-11">
+  <div class="btn-group">
+    <% tag_cloud(@condition_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+      <button type="button" class="btn btn-default">
+	<%= link_to tag.name, { :action => :home, :condition_id => tag.name }, :class => css_class %>
+      </button>
+    <% end %>
+    <button type="button" class="btn btn-default"><%= link_to 'CLEAR', root_path %></button>
+    </div>
+  </div>
+</div>
+
+<br>
 
 <%= will_paginate @questions %>
 
-<ul class="feed-list">
+<div class="list-group">
   <% @questions.each do |question| %>
-  <li>
-    <%= question.user.name %> asked:
-    <%= link_to question.content, question_path(question) %>
-  <br> Topics: <%= question.topic_list %>
-  <br> Conditions: <%= question.condition_list %>
-  <br> <%= pluralize(question.answers.count, "answer") %>
-  </li>
+    <%= link_to question_path(question), :class => 'list-group-item'  do %>
+      <%= question.user.name %> asked: <%= question.content %>
+      <br> Topics: <%= question.topic_list %>
+      <br> Conditions: <%= question.condition_list %>
+      <span class="badge"><%= pluralize(question.answers.count, "answer") %></span>
+    <% end %>
   <% end %>
-</ul>
+</div>
 
 <%= will_paginate @questions %>

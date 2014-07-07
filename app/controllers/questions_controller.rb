@@ -1,11 +1,15 @@
 class QuestionsController < ApplicationController
-  before_action :signed_in_user, only: [:new, :create, :destroy]
+  before_action :signed_in_user, only: [:new, :create, :destroy, :signin_show]
 
   def show
-    @user = current_user
     @question = Question.find(params[:id])
     @answers = @question.answers.paginate(:page => params[:page])
-    @answer = @question.answers.build(user_id: @user.id)
+    @user = current_user
+    @answer = @user && @question.answers.build(user_id: @user.id)
+  end
+
+  def signin_show
+    redirect_to action: 'show'
   end
 
   def new

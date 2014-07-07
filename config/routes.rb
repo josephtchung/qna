@@ -6,6 +6,8 @@ Qna::Application.routes.draw do
 
   root 'feed#home'
 
+  match '/questions/signin_show/:id', to: 'questions#signin_show', via: 'get', as: :signin_show
+
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'

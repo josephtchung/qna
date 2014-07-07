@@ -32,6 +32,8 @@
 <%= will_paginate @answers %>
 
 
+<% if @user %> <%# only show answer form if signed in %>
+
 <div class="container">
   <p> Answer this question</p>
   <%= form_for(@answer, url: '/create_answer', html: {class: 'form-question', role: 'form'}) do |f| %>
@@ -43,3 +45,10 @@
   <%= f.submit "Done", class: "btn btn-large btn-primary" %>
   <% end %>
 </div class="container">
+
+<% else %>
+
+<p>
+<%= link_to 'Answer This Question', signin_show_path %>
+</p>
+<% end %>
