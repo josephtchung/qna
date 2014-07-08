@@ -1,11 +1,12 @@
 <% provide(:title, 'Show Question') %>
 
 <div class="row">
+  <div class="col-md-1">Filter by</div>
   <div class="col-md-1">Topic:</div>
-  <div class="col-md-11">
+  <div class="col-md-10">
   <div class="btn-group">
     <% tag_cloud(@topic_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-      <% css_class += ' active' if @tags.include?(tag.name) %>
+      <% css_class += ' active' if @filter_tags.include?(tag.name) %>
       <%= link_to tag.name, { :action => :home, :topic_id => tag.name }, 
       :class => 'btn btn-default btn-sm ' + css_class %>
     <% end %>
@@ -14,13 +15,14 @@
 </div>
 
 <div class="row">
-  <div class="col-md-1">Condition:</div>
-  <div class="col-md-11">
+  <div class="col-md-1"></div>
+  <div class="col-md-1">Condition:</div>  
+  <div class="col-md-10">
   <div class="btn-group">
     <% tag_cloud(@condition_tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
-      <% css_class += ' active' if @tags.include?(tag.name) %>
+      <% css_class += ' active' if @filter_tags.include?(tag.name) %>
       <%= link_to tag.name, { :action => :home, :condition_id => tag.name }, 
-      :class => 'btn btn-default btn-sm' + css_class %>
+      :class => 'btn btn-default btn-sm ' + css_class %>
       <% end %>
   </div>
   <%= link_to 'Clear Filters', { :action => :home, :clear => true }, class: 'btn btn-info btn-sm' %>
