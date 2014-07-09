@@ -35,12 +35,7 @@
 
 <div class="list-group">
   <% @questions.each do |question| %>
-    <%= link_to question_path(question), :class => 'list-group-item'  do %>
-      <%= question.user.name %> asked: <%= question.content %>
-      <br> Topics: <%= question.topic_list %>
-      <br> Conditions: <%= question.condition_list %>
-      <span class="badge"><%= pluralize(question.answers.count, "answer") %></span>
-    <% end %>
+  <%= render question %>
   <% end %>
 </div>
 

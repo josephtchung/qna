@@ -1,0 +1,8 @@
+<%= link_to question_path(question), :class => 'list-group-item'  do %>
+  <span class="user-link" z-index=-1 onclick="userLinkClicked(<%= question.user.id.to_s  %>)">
+  <%=  question.user.name %>
+  </span> asked: <%= question.content %>
+  <br> Topics: <%= question.topic_list %>
+  <br> Conditions: <%= question.condition_list %>
+  <span class="badge"><%= pluralize(question.answers.count, "answer") %></span>
+<% end %>

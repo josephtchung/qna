@@ -9,17 +9,9 @@
 
 <% if @answers.count > 0 %>
   <h4>Answers</h4>
-  <%= will_paginate @answers %>
 
   <% @answers.each do |answer| %>
-    <div class="row">
-      <div class="col-md-1">
-	<%= answer.user.name %>:
-      </div>
-      <div class="col-md-11">
-	<%= answer.content %>
-      </div>
-    </div>
+    <%= render answer %>
   <% end %>
 
   <%= will_paginate @answers %>

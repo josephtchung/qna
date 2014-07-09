@@ -1,10 +1,21 @@
 <% provide(:title, @user.name) %>
-<div class="row">
-  <aside class="span4">
-    <section>
-      <h1>
-        <%= @user.name %>
-      </h1>
-    </section>
-  </aside>
-</div>
+<h3><%= @user.name %></h3>
+
+<h4>Questions Asked</h4>
+
+
+<% @questions.each do |question| %>
+  <%= render question %>
+<% end %>
+
+<%= will_paginate @questions, param_name: :qpage  %>
+
+
+<h4>Questions Answered</h4>
+
+<% @answers.each do |answer| %>
+  <%= render answer.question %>
+<% end %>
+
+<%= will_paginate @answers, param_name: :apage %>
+
